@@ -87,17 +87,7 @@ class DBHelper():
             self.conn.commit()
 
             #if it does not exists then following possibilities may occur.
-            if not self.c.fetchone() and semester == 1:
-                
-                self.c.execute(q + str(roll) + " AND semester=0")
-
-                #above query fails. that means student has not paid the Odd semester fee. So we show
-                #a dialog saying the same.
-                if not self.c.fetchone():
-                    QMessageBox.warning(QMessageBox(), 'Error',
-                                        'Student with roll no ' + str(
-                                            roll) + ' has Odd Semester fee payment due.Pay that first.')
-                    return None
+            if not self.c.fetchone():
                 
                 QMessageBox.information(QMessageBox(), 'Successful','Payment is added successfully to the database.\nReference ID=' + str(reciept_no))
 
